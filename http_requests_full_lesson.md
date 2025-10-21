@@ -1,6 +1,7 @@
 # 📘 Mastering HTTP Requests in Ruby & Rails
 
 ## Table of Contents
+
 1. [What is HTTP?](#what-is-http)
 2. [HTTP Request & Response Anatomy](#http-request--response-anatomy)
 3. [HTTP Methods](#http-methods)
@@ -12,14 +13,15 @@
 ---
 
 ## What is HTTP?
-HTTP (HyperText Transfer Protocol) is the language used for communication between **clients** (browsers, apps) and **servers** (Rails apps).
+
+HTTP (HyperText Transfer Protocol) is the language used for communication between **clients** (browsers, apps) and **servers** (Web App).
 
 **Client ↔ Server Model:**
 
 ```
 Client (Browser/App)
       ↓ HTTP Request
-Server (Application)
+Server (Web App)
       ↑ HTTP Response
 ```
 
@@ -32,19 +34,23 @@ Server (Application)
 ## HTTP Request & Response Anatomy
 
 ### HTTP Request
+
 ```
 GET /users/1 HTTP/1.1
 Host: example.com
 Content-Type: application/json
 Authorization: Bearer token123
 ```
+
 **Parts:**
+
 - Method (GET, POST, PUT, PATCH, DELETE)
 - Path (/users/1)
 - Headers (metadata: auth, content-type, etc.)
 - Body (for POST/PUT/PATCH)
 
 ### HTTP Response
+
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -53,6 +59,7 @@ Content-Type: application/json
 ```
 
 **Parts:**
+
 - Status code (200, 404, 500, etc.)
 - Headers
 - Body (data payload)
@@ -74,6 +81,7 @@ Content-Type: application/json
 ## Headers, Query Params, JSON
 
 ### Query Parameters
+
 ```ruby
 require 'uri'
 
@@ -83,6 +91,7 @@ puts uri
 ```
 
 ### Custom Headers
+
 ```ruby
 require 'net/http'
 uri = URI("https://example.com")
@@ -91,6 +100,7 @@ req['Authorization'] = "Bearer token123"
 ```
 
 ### JSON Serialization
+
 ```ruby
 require 'json'
 user = { name: "Brian", age: 27 }
@@ -103,6 +113,7 @@ hash = JSON.parse(json)      # Deserialize
 ## Making HTTP Requests in Ruby
 
 ### Net::HTTP
+
 ```ruby
 require 'net/http'
 require 'json'
@@ -121,16 +132,17 @@ puts data["title"]
 ## Error Handling and Status Codes
 
 **Status codes examples:**
+
 | Code | Meaning |
 |------|---------|
 | 100 | Continue |
-|101 | Switching Protocols |
+| 101 | Switching Protocols |
 | 200  | OK |
 | 201  | Created |
 | 204  | No Content |
+| 301 | Moved Permanently |
 | 302 | Found |
 | 400  | Bad Request |
-| 301 | Moved Permanently |
 | 401  | Unauthorized |
 | 403 | Forbidden |
 | 404  | Not Found |
@@ -140,13 +152,14 @@ puts data["title"]
 | 502 | Bad Gateway |
 | 503 | Service Unavailable |
 | 504 | Gateway Timeout |
-| 1xx | Informational Responses | 
+| 1xx | Informational Responses |
 | 2xx | Success Codes |
 | 3xx | Redirection Codes |
-| 4xx | Client Error Codes Indicate that the client appears to have made an error. |
-| 5xx | Server Error Codes Indicate that the server failed to fulfill a valid request. |
+| 4xx | Client Error Codes |
+| 5xx | Server Error |
 
 **Rescue network errors:**
+
 ```ruby
 require 'net/http'
 begin
@@ -158,20 +171,10 @@ end
 
 ---
 
-## Mini Project
-**Task:** Fetch posts from `https://jsonplaceholder.typicode.com/posts` and display titles in ruby console or webpage.
-
----
-
-## Advanced Learner Box
-- Async HTTP requests using threads or background jobs (Sidekiq, ActiveJob)
-- Using Faraday middleware for logging or retries
-- Explore HTTP/2 and keep-alive for performance
-
----
-
 ## Summary & Exercises
+
 - Understand HTTP request/response structure
 - Understand Request Codes
 - Practice using Net::HTTP
 
+**Task:** Fetch posts from `https://jsonplaceholder.typicode.com/posts` and display titles in ruby console or webpage.
